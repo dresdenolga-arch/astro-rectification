@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анкета ректификации времени рождения</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #1c1e21;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .header .emoji { font-size: 36px; margin-bottom: 8px; }
+  h1 { font-size: 20px; font-weight: 700; color: #1c1e21; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #65676b; line-height: 1.5; }
+
+  .section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e4e6ea;
+  }
+  .section:last-of-type { border-bottom: none; }
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #65676b;
+    margin-bottom: 14px;
+  }
+
+  label { display: block; font-size: 14px; font-weight: 600; color: #1c1e21; margin-bottom: 5px; }
+  .hint { font-size: 12px; color: #8a8d91; margin-bottom: 6px; font-weight: 400; }
+  input, select, textarea {
+    width: 100%;
+    padding: 10px 13px;
+    border: 1.5px solid #dddfe2;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1c1e21;
+    background: #f7f8fa;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #5b85d4;
+    background: white;
+  }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+
+  .event-block {
+    background: #f7f8fa;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .event-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #5b85d4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .event-block input { background: white; margin-bottom: 8px; }
+  .event-block input:last-child { margin-bottom: 0; }
+
+  .btn-send {
+    width: 100%;
+    padding: 14px;
+    background: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-send:hover { background: #006ba1; }
+  .btn-send:active { background: #005a87; }
+
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: #8a8d91;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+  .required { color: #e03c31; }
+
+  /* Звёздочки на обязательных */
+  .req-label::after { content: ' *'; color: #e03c31; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <div class="emoji">🌟</div>
+    <h1>Анкета ректификации времени рождения</h1>
+    <p class="subtitle">Заполните форму — нажмите «Отправить», Telegram откроется с готовым сообщением.<br>Чем точнее события и даты — тем точнее результат.</p>
+  </div>
+
+  <form id="form">
+
+    <!-- ОСНОВНЫЕ ДАННЫЕ -->
+    <div class="section">
+      <div class="section-title">Основные данные</div>
+
+      <label class="req-label">Имя и фамилия</label>
+      <input type="text" id="name" placeholder="Как вас зовут" required>
+
+      <div class="row">
+        <div>
+          <label class="req-label">Дата рождения</label>
+          <input type="text" id="bdate" placeholder="ДД.ММ.ГГГГ" required>
+        </div>
+        <div>
+          <label class="req-label">Место рождения</label>
+          <input type="text" id="bplace" placeholder="Город, страна" required>
+        </div>
+      </div>
+
+      <label class="req-label">Время рождения</label>
+      <div class="hint">Если точно неизвестно — укажите примерный диапазон</div>
+      <input type="text" id="btime" placeholder="Например: 14:30 или «около 15:00» или «ночью»" required>
+
+      <label>Источник времени</label>
+      <select id="bsource">
+        <option value="">— выберите —</option>
+        <option value="свидетельство о рождении">Свидетельство о рождении</option>
+        <option value="слова мамы/родственников">Слова мамы / родственников</option>
+        <option value="медкарта / роддом">Медкарта / роддом</option>
+        <option value="только приблизительно">Только приблизительно (не помним)</option>
+        <option value="вообще неизвестно">Вообще неизвестно</option>
+      </select>
+    </div>
+
+    <!-- ВНЕШНОСТЬ -->
+    <div class="section">
+      <div class="section-title">Внешность и энергетика</div>
+      <div class="hint" style="margin-bottom:12px">Помогает определить Асцендент — знак, отвечающий за внешний вид и первое впечатление</div>
+
+      <div class="row">
+        <div>
+          <label>Рост</label>
+          <input type="text" id="height" placeholder="Например: 168 см">
+        </div>
+        <div>
+          <label>Телосложение</label>
+          <select id="build">
+            <option value="">—</option>
+            <option>Хрупкое, тонкокостное</option>
+            <option>Среднее, пропорциональное</option>
+            <option>Крепкое, плотное</option>
+            <option>Высокое, худощавое</option>
+            <option>Невысокое, коренастое</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Характерные черты внешности</label>
+      <div class="hint">Глаза, волосы, форма лица, что люди замечают первым</div>
+      <input type="text" id="appearance" placeholder="Например: миндалевидные глаза, острые черты, густые волосы...">
+
+      <label>Тип энергии</label>
+      <select id="energy">
+        <option value="">—</option>
+        <option value="утренний человек, рано встаю">Утренний человек — рано встаю, активна с утра</option>
+        <option value="вечерний человек, поздно ложусь">Вечерний человек — разгораюсь к вечеру</option>
+        <option value="нет выраженного ритма">Нет выраженного ритма</option>
+      </select>
+    </div>
+
+    <!-- КЛЮЧЕВЫЕ СОБЫТИЯ -->
+    <div class="section">
+      <div class="section-title">Ключевые события жизни <span class="required">*</span></div>
+      <div class="hint" style="margin-bottom:14px">
+        Укажите <strong>5–7 значимых событий</strong> с как можно более точными датами.<br>
+        Подходит: переезды, брак / развод, рождение детей, смерть близких, болезни/операции, смена работы, потеря/прирост денег, обучение за рубежом.
+      </div>
+
+      <div id="events">
+        <div class="event-block">
+          <div class="event-num">Событие 1</div>
+          <input type="text" class="ev-date" placeholder="Дата (месяц.год или точно: 15.03.2010)">
+          <input type="text" class="ev-desc" placeholder="Что произошло">
+        </div>
+        <div class="event-block">
+          <div class="event-num">Событие 2</div>
+          <input type="text" class="ev-date" placeholder="Дата">
+          <input type="text" class="ev-desc" placeholder="Что произошло">
+        </div>
+        <div class="event-block">
+          <div class="event-num">Событие 3</div>
+          <input type="text" class="ev-date" placeholder="Дата">
+          <input type="text" class="ev-desc" placeholder="Что произошло">
+        </div>
+        <div class="event-block">
+          <div class="event-num">Событие 4</div>
+          <input type="text" class="ev-date" placeholder="Дата">
+          <input type="text" class="ev-desc" placeholder="Что произошло">
+        </div>
+        <div class="event-block">
+          <div class="event-num">Событие 5</div>
+          <input type="text" class="ev-date" placeholder="Дата">
+          <input type="text" class="ev-desc" placeholder="Что произошло">
+        </div>
+        <div class="event-block">
+          <div class="event-num">Событие 6 (необязательно)</div>
+          <input type="text" class="ev-date" placeholder="Дата">
+          <input type="text" class="ev-desc" placeholder="Что произошло">
+        </div>
+        <div class="event-block">
+          <div class="event-num">Событие 7 (необязательно)</div>
+          <input type="text" class="ev-date" placeholder="Дата">
+          <input type="text" class="ev-desc" placeholder="Что произошло">
+        </div>
+      </div>
+    </div>
+
+    <!-- ДОПОЛНИТЕЛЬНО -->
+    <div class="section">
+      <div class="section-title">Дополнительно</div>
+
+      <label>Что вы хотите прояснить / уточнить?</label>
+      <div class="hint">Тема, которая сейчас наиболее актуальна — работа, отношения, здоровье, деньги</div>
+      <textarea id="focus" placeholder="Необязательно — но помогает сфокусировать прогноз"></textarea>
+
+      <label>Контакт в Telegram</label>
+      <input type="text" id="tgcontact" placeholder="@username или номер телефона">
+    </div>
+
+    <button type="submit" class="btn-send">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Отправить в Telegram
+    </button>
+
+    <p class="footer-note">
+      Нажимая кнопку, Telegram откроется с готовым сообщением.<br>
+      Вам останется только нажать «Отправить» внутри приложения.
+    </p>
+
+  </form>
+</div>
+
+<script>
+// ← ЗАМЕНИТЕ на ваш Telegram username (без @)
+const TG_USERNAME = 'OlgaFleur';
+
+document.getElementById('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name      = v('name');
+  const bdate     = v('bdate');
+  const bplace    = v('bplace');
+  const btime     = v('btime');
+  const bsource   = v('bsource');
+  const height    = v('height');
+  const build     = v('build');
+  const appear    = v('appearance');
+  const energy    = v('energy');
+  const focus     = v('focus');
+  const tgcontact = v('tgcontact');
+
+  // Собираем события
+  const dates = document.querySelectorAll('.ev-date');
+  const descs = document.querySelectorAll('.ev-desc');
+  let events = '';
+  for (let i = 0; i < dates.length; i++) {
+    const d = dates[i].value.trim();
+    const t = descs[i].value.trim();
+    if (d || t) {
+      events += `\n  ${i+1}. ${d ? d + ' — ' : ''}${t}`;
+    }
+  }
+  if (!events) events = '\n  (не заполнено)';
+
+  let msg = `🌟 АНКЕТА РЕКТИФИКАЦИИ
+
+👤 ${name}
+📅 Дата: ${bdate}
+📍 Место: ${bplace}
+🕐 Время: ${btime}${bsource ? ' (' + bsource + ')' : ''}`;
+
+  if (height || build) {
+    msg += `\n\n📏 Внешность:`;
+    if (height) msg += `\n  Рост: ${height}`;
+    if (build)  msg += `\n  Телосложение: ${build}`;
+    if (appear) msg += `\n  Черты: ${appear}`;
+    if (energy) msg += `\n  Энергия: ${energy}`;
+  }
+
+  msg += `\n\n📌 Ключевые события:${events}`;
+
+  if (focus) msg += `\n\n💬 Фокус: ${focus}`;
+  if (tgcontact) msg += `\n📲 TG: ${tgcontact}`;
+
+  const encoded = encodeURIComponent(msg);
+  const url = `https://t.me/${TG_USERNAME}?text=${encoded}`;
+  window.open(url, '_blank');
+});
+
+function v(id) { return document.getElementById(id).value.trim(); }
+</script>
+</body>
+</html>
