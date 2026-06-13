@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дети Ирины</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #1c1e21; padding: 20px; min-height: 100vh; }
+    .card { background: #fff; border-radius: 16px; max-width: 680px; margin: 0 auto 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; }
+    .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 32px 28px 24px; text-align: center; }
+    .emoji { font-size: 48px; margin-bottom: 12px; }
+    h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .subtitle { font-size: 14px; opacity: 0.8; line-height: 1.5; }
+    .tabs { display: flex; background: #f0f2f5; border-bottom: 1px solid #e4e6e9; }
+    .tab { flex: 1; padding: 14px 8px; text-align: center; cursor: pointer; font-size: 14px; font-weight: 600; color: #666; border: none; background: none; transition: all 0.2s; }
+    .tab.active { color: #1877f2; background: #fff; border-bottom: 3px solid #1877f2; }
+    .tab:hover:not(.active) { background: #e8eaed; }
+    .child-panel { display: none; }
+    .child-panel.active { display: block; }
+    .child-header { padding: 20px 28px 12px; border-bottom: 1px solid #f0f2f5; }
+    .child-meta { display: flex; align-items: center; gap: 12px; }
+    .child-emoji { font-size: 36px; }
+    .child-name { font-size: 20px; font-weight: 700; }
+    .child-date { font-size: 13px; color: #65676b; margin-top: 2px; }
+    .section { padding: 20px 28px; border-bottom: 1px solid #f0f2f5; }
+    .section:last-of-type { border-bottom: none; }
+    .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #1877f2; margin-bottom: 14px; }
+    .desc h3 { font-size: 15px; font-weight: 700; color: #1c1e21; margin: 16px 0 8px; }
+    .desc h3:first-child { margin-top: 0; }
+    .desc p { font-size: 15px; line-height: 1.65; color: #444; margin-bottom: 10px; }
+    .desc p:last-child { margin-bottom: 0; }
+    .strength-list, .vuln-list, .prof-list { list-style: none; padding: 0; }
+    .strength-list li { padding: 8px 0 8px 24px; position: relative; font-size: 14px; line-height: 1.5; color: #444; border-bottom: 1px solid #f5f5f5; }
+    .strength-list li:last-child { border-bottom: none; }
+    .strength-list li::before { content: '✓'; position: absolute; left: 0; color: #42b72a; font-weight: 700; }
+    .vuln-list li { padding: 8px 0 8px 24px; position: relative; font-size: 14px; line-height: 1.5; color: #444; border-bottom: 1px solid #f5f5f5; }
+    .vuln-list li:last-child { border-bottom: none; }
+    .vuln-list li::before { content: '→'; position: absolute; left: 0; color: #e8982e; font-weight: 700; }
+    .prof-list li { padding: 7px 0 7px 22px; position: relative; font-size: 14px; line-height: 1.5; color: #444; }
+    .prof-list li::before { content: '◆'; position: absolute; left: 0; color: #1877f2; font-size: 10px; top: 10px; }
+    .highlight { background: #f0f4ff; border-left: 4px solid #1877f2; padding: 14px 16px; border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.6; color: #333; margin: 12px 0; }
+    .highlight strong { color: #1877f2; }
+    .fortune-box { background: #f6fff4; border: 1px solid #b7eab0; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #2d5a27; line-height: 1.5; margin-top: 12px; }
+    .fortune-box strong { color: #2d5a27; }
+    .parent-note { background: #fff8e8; border: 1px solid #f0d080; border-radius: 8px; padding: 14px 16px; font-size: 14px; line-height: 1.6; color: #5a4a20; margin-top: 4px; }
+    .common-section { background: #f9f9f9; border-radius: 12px; padding: 20px; margin: 0 28px 20px; font-size: 14px; line-height: 1.65; color: #444; }
+    .common-section h3 { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px; }
+    label { display: block; font-size: 14px; font-weight: 600; color: #333; margin: 16px 0 6px; }
+    textarea { width: 100%; border: 1.5px solid #ddd; border-radius: 8px; padding: 10px 12px; font-size: 14px; font-family: inherit; resize: vertical; min-height: 80px; transition: border-color 0.2s; color: #333; }
+    textarea:focus { outline: none; border-color: #1877f2; }
+    .stars { display: flex; gap: 6px; font-size: 26px; cursor: pointer; margin: 4px 0 0; }
+    .stars span { opacity: 0.35; transition: opacity 0.15s; }
+    .stars span.on { opacity: 1; }
+    .theme-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+    .theme-row:last-child { border-bottom: none; }
+    .theme-label { flex: 1; font-size: 14px; color: #444; }
+    .theme-btns { display: flex; gap: 6px; }
+    .theme-btns button { padding: 5px 12px; border: 1.5px solid #ddd; border-radius: 20px; background: #f9f9f9; font-size: 12px; cursor: pointer; transition: all 0.15s; }
+    .theme-btns button:hover { border-color: #1877f2; color: #1877f2; }
+    .theme-btns button.sel-y { background: #e6f4ea; border-color: #42b72a; color: #2d7a1f; font-weight: 600; }
+    .theme-btns button.sel-p { background: #fff8e1; border-color: #f0a500; color: #8a5e00; font-weight: 600; }
+    .theme-btns button.sel-n { background: #fdecea; border-color: #e03131; color: #9a1c1c; font-weight: 600; }
+    .btn-send { display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #0f3460, #1877f2); color: white; border: none; padding: 14px 28px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; margin: 20px auto 0; transition: opacity 0.2s; }
+    .btn-send:hover { opacity: 0.9; }
+    .footer-note { text-align: center; font-size: 12px; color: #999; margin-top: 10px; line-height: 1.5; }
+    .child-selector-label { font-size: 14px; font-weight: 600; color: #333; margin: 0 0 10px; }
+    .child-select-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .child-select-btns label { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1.5px solid #ddd; border-radius: 20px; cursor: pointer; font-size: 14px; font-weight: 500; color: #555; background: #f9f9f9; transition: all 0.15s; margin: 0; }
+    .child-select-btns input[type=checkbox] { display: none; }
+    .child-select-btns label:has(input:checked) { background: #e8f0fe; border-color: #1877f2; color: #1877f2; font-weight: 600; }
+    @media (max-width: 480px) {
+      body { padding: 10px; }
+      .section { padding: 16px 18px; }
+      .child-header { padding: 16px 18px 12px; }
+      .tab { font-size: 12px; padding: 12px 4px; }
+      .common-section { margin: 0 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="emoji">👨‍👩‍👦‍👦</div>
+    <h1>Дети Ирины</h1>
+    <p class="subtitle">Ольга составила описание для каждого ребёнка.<br>Прочитайте и поделитесь — что совпало, что нет.<br>Это помогает уточнить описание и сделать его точнее.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showChild(0, this)">Саша</button>
+    <button class="tab" onclick="showChild(1, this)">Гоша</button>
+    <button class="tab" onclick="showChild(2, this)">Ваня</button>
+  </div>
+
+  <!-- САША -->
+  <div class="child-panel active" id="panel-0">
+    <div class="child-header">
+      <div class="child-meta">
+        <div class="child-emoji">👦</div>
+        <div>
+          <div class="child-name">Саша</div>
+          <div class="child-date">22 апреля 2005 · 09:55 · Москва</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Как он устроен</div>
+      <div class="desc">
+        <p>За внешней мягкостью и спокойствием — устойчивый внутренний стержень. Саша не производит впечатление человека, который рвётся вперёд, но когда нужно — действует быстро, точно, и часто оказывается прав.</p>
+        <p>Главное, что движет им: ощущение безопасности и принадлежности. Дом, близкие, свой круг — это не фон, а основа. Когда с этим хорошо — работает, растёт, открывается. Когда нет — уходит в себя.</p>
+        <p>Глубоко лоялен. Там, где привязался — до конца. Предательство или нечестность переживает тяжело, хотя снаружи может не показать.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Сильные стороны</div>
+      <ul class="strength-list">
+        <li>Считывает людей тонко — чувствует настроение до того, как кто-то что-то сказал. Это реальный инструмент, который в жизни работает лучше многих аналитических способностей</li>
+        <li>В профессиональных и общественных ситуациях — быстрый, прямой, готов брать инициативу. Умеет говорить убедительно</li>
+        <li>Умеет строить длинные отношения — дружбу, сотрудничество, любовь. Не бросает, не переключается быстро</li>
+        <li>Хороший практический вкус: умеет создавать правильную атмосферу и ценит это в других</li>
+        <li>Легко вписывается в разные компании, умеет находить общий язык — и при этом не теряет себя</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Уязвимые места</div>
+      <ul class="vuln-list">
+        <li>Внутри работает фоновая тревога о принадлежности — «принят ли я по-настоящему». Снаружи не видно. Но может долго сдерживать напряжение, а потом выдавать его неожиданно — раздражением, закрытостью, уходом</li>
+        <li>В том, что касается своих желаний и чувств — труднее с решениями. Умеет взвешивать всё со всех сторон, но это же мешает выбирать</li>
+        <li>Эмоции не выходят быстро — копятся внутри, потом прорываются</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Родителям важно знать</div>
+      <div class="parent-note">
+        Конфликты в семье Саша переживает глубже, чем показывает. Критика должна быть аккуратной — легко ранит, хотя и не покажет вида. Ему важно видеть, что его ценят <em>не за результат</em>, а за то, кто он есть. Поощряйте не только достижения — поддерживайте присутствие и близость. Иногда мягко спрашивайте, как он на самом деле.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Профессиональные направления</div>
+      <div class="desc">
+        <h3>Где может реализоваться</h3>
+        <ul class="prof-list">
+          <li>Финансы, управление, банковское дело</li>
+          <li>Архитектура, недвижимость, строительство</li>
+          <li>Психология, консультирование, коучинг</li>
+          <li>Медицина (семейная, педиатрия)</li>
+          <li>Искусство, дизайн, музыка — как параллельная линия</li>
+        </ul>
+        <div class="fortune-box" style="margin-top:14px;">
+          <strong>Где удача:</strong> всё, что делается вместе с кем-то близким, а не в одиночку. Семейные связи и партнёрство — реальный ресурс. Место жительства и «свой круг» могут открыть двери.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ГОША -->
+  <div class="child-panel" id="panel-1">
+    <div class="child-header">
+      <div class="child-meta">
+        <div class="child-emoji">👦</div>
+        <div>
+          <div class="child-name">Гоша</div>
+          <div class="child-date">30 июня 2009 · 01:55 · Москва</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Как он устроен</div>
+      <div class="desc">
+        <p>Самый коммуникативный из троих. Мозг работает быстро, переключается легко, видит связи между вещами — иногда быстрее, чем успевает объяснить другим. Снаружи — живость, любопытство, умение поговорить с кем угодно.</p>
+        <p>При этом под этой подвижностью — реальная эмоциональная глубина. Финансовая стабильность семьи для него — это не просто деньги, а ощущение, что всё в порядке. Когда с этим плохо — переживает глубже, чем кажется.</p>
+        <p>Есть скрытая сторона: настоящие желания, вкусы, артистическая природа не сразу видны окружающим. Может производить впечатление «лёгкого» человека, тогда как внутри — очень серьёзная и тонкая сторона.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Сильные стороны</div>
+      <ul class="strength-list">
+        <li>Говорит хорошо с детства, пишет естественно, объясняет сложное просто — это встроенная способность, а не навык</li>
+        <li>Быстро перестраивается под ситуацию, не теряется когда меняются обстоятельства</li>
+        <li>Умеет выстраивать связи — нужные люди и интересные знакомства появляются как бы сами; это его реальный ресурс</li>
+        <li>За лёгкой поверхностью — серьёзные внутренние процессы. Когда научится их предъявлять — станет очень объёмной личностью</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Уязвимые места</div>
+      <ul class="vuln-list">
+        <li>Слишком много интересного одновременно — может начинать много, заканчивать меньше. Важно помогать удерживать фокус</li>
+        <li>В творчестве внутренний критик очень строгий. Может долго не показывать сделанное, потому что «недостаточно хорошо»</li>
+        <li>Долго не понимает, чего на самом деле хочет — может идти туда, куда удобно, и только потом обнаруживать, что это было не его</li>
+        <li>Финансовая нестабильность переживается особенно остро — важно не создавать у него ощущения, что «всё рушится»</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Родителям важно знать</div>
+      <div class="parent-note">
+        Гоша коммуникативный — но его внутренний мир намного тише и глубже, чем снаружи. Не путайте «говорит много» с «всё в порядке». Когда что-то серьёзное — может не говорить. Его творческую сторону важно поддерживать без оценочности: интересуйтесь процессом, не результатом. Поощряйте доводить до конца хотя бы несколько важных вещей — это сформирует уверенность в себе.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Профессиональные направления</div>
+      <div class="desc">
+        <h3>Где может реализоваться</h3>
+        <ul class="prof-list">
+          <li>Медиа, журналистика, контент-создание, блогинг</li>
+          <li>Педагогика и преподавание</li>
+          <li>IT — интерфейсы, коммуникация между системами</li>
+          <li>Торговля, переговоры, дипломатия</li>
+          <li>Гуманитарные и социальные проекты</li>
+        </ul>
+        <div class="fortune-box" style="margin-top:14px;">
+          <strong>Где удача:</strong> возможности приходят через людей. Нужные знакомства, правильная компания, командные проекты. Одиночный путь менее эффективен, чем командный.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ВАНЯ -->
+  <div class="child-panel" id="panel-2">
+    <div class="child-header">
+      <div class="child-meta">
+        <div class="child-emoji">👶</div>
+        <div>
+          <div class="child-name">Ваня</div>
+          <div class="child-date">23 ноября 2015 · 20:05 · Москва</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Как он устроен</div>
+      <div class="desc">
+        <p>Из троих — самый внутренне живой. Одновременно очень любопытен к миру и очень нуждается в эмоциональной безопасности. Внешнее — энтузиазм, живость, идеи. Внутреннее — тонкая чувствительность, которую не сразу покажет.</p>
+        <p>С раннего возраста будет думать о том, чего хочет достичь, как выглядит в глазах других. Это не тщеславие — это потребность строить что-то устойчивое и видимое.</p>
+        <p>Карьера, скорее всего, будет нестандартной: пойдёт своим путём — и это хорошо, даже если поначалу кажется пугающим.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Сильные стороны</div>
+      <ul class="strength-list">
+        <li>Учёба, чтение, информация — интересны сами по себе. Будет читать и спрашивать не потому что надо, а потому что любопытно</li>
+        <li>Способность видеть большую картину: находит смысл там, где другие видят только детали</li>
+        <li>Даже в трудных ситуациях сохраняет способность видеть, как может быть хорошо — это реальный ресурс</li>
+        <li>Чувствует глубоко и надолго; способен на настоящую верность и привязанность</li>
+        <li>С детства видит вещи иначе, чем большинство — это не странность, а преимущество</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Уязвимые места</div>
+      <ul class="vuln-list">
+        <li>Ему труднее, чем другим детям, просто играть и радоваться без смысла. Может слишком рано стать «серьёзным» или брать ответственность не по возрасту</li>
+        <li>Видит большое, но детали и рутина даются тяжело. Может бросать начатое, когда становится скучно — не потому что ленивый, а потому что нужен смысл</li>
+        <li>Трудно прямо выражать злость или отстаивать себя дома. Может накапливать напряжение, а потом выдавать косвенно</li>
+        <li>Принимает близко к сердцу конфликты в семье, настроение родителей. Нейтральный тон важнее «правильных слов»</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Родителям важно знать</div>
+      <div class="parent-note">
+        Ваня — мыслитель. Ему нужно объяснять «зачем», а не просто говорить «надо». Без смысла не включается. <strong>Не торопите взросление:</strong> если он слишком серьёзный для своего возраста — давайте разрешение просто быть ребёнком, «незаслуженную» радость без условий. Его будущая карьера будет его собственной — поддерживайте нестандартные интересы. Дом как база критически важен: если дома спокойно — расцветает. Учите говорить «мне не нравится» прямо, без вины.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Профессиональные направления</div>
+      <div class="desc">
+        <h3>Где может реализоваться</h3>
+        <ul class="prof-list">
+          <li>Образование, наука, педагогика</li>
+          <li>Философия, культурология, история</li>
+          <li>Путешествия, международная деятельность</li>
+          <li>Журналистика, документалистика, книги</li>
+          <li>Спорт — если есть большая идея, а не просто результат</li>
+          <li>IT при наличии большой, осмысленной задачи</li>
+        </ul>
+        <div class="fortune-box" style="margin-top:14px;">
+          <strong>Где удача:</strong> через образование и слово. Учёба и чтение реально открывают двери. Не «большой мир» как таковой, а глубина в конкретной области.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ОБЩЕЕ -->
+  <div class="common-section">
+    <h3>Общее для всех троих</h3>
+    <p>Все три ребёнка эмоционально тонкие и глубоко чувствующие. Ни один из них не «безопасен» от того, что происходит в семье — все трое впитывают настроение и напряжение дома. Они чаще страдают от недосказанности, чем от самих событий. Их сила — в эмоциональном интеллекте, который при правильной поддержке становится главным преимуществом в жизни.</p>
+  </div>
+</div>
+
+<!-- ФОРМА ОС -->
+<div class="card">
+  <form id="form">
+    <div class="section">
+      <div class="section-title">Обратная связь</div>
+
+      <p class="child-selector-label">Про кого хочу написать:</p>
+      <div class="child-select-btns">
+        <label><input type="checkbox" name="child" value="Саша"> 👦 Саша</label>
+        <label><input type="checkbox" name="child" value="Гоша"> 👦 Гоша</label>
+        <label><input type="checkbox" name="child" value="Ваня"> 👶 Ваня</label>
+      </div>
+
+      <label>Насколько точны описания в целом?</label>
+      <div class="stars"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+
+      <label>Что описано очень точно?</label>
+      <div style="font-size:12px;color:#888;margin-bottom:6px;">Что узнали себя — или своего ребёнка — с первого прочтения</div>
+      <textarea id="matched" placeholder="Можете процитировать фразу или описать своими словами…"></textarea>
+
+      <label>Что НЕ совпало или показалось неверным?</label>
+      <div style="font-size:12px;color:#888;margin-bottom:6px;">Это так же важно, как совпадения</div>
+      <textarea id="notmatched" placeholder="Что не похоже на вашего ребёнка…"></textarea>
+
+      <label>Что удивило или было неожиданным?</label>
+      <textarea id="surprised" placeholder="Что-то, чего не ожидали увидеть…"></textarea>
+
+      <label>По темам — насколько точно попало в каждую?</label>
+      <div style="margin-top:8px;">
+        <div class="theme-row">
+          <span class="theme-label">Характер и личность</span>
+          <div class="theme-btns">
+            <button type="button" data-c="y">Точно ✓</button>
+            <button type="button" data-c="p">Частично</button>
+            <button type="button" data-c="n">Не моё</button>
+          </div>
+        </div>
+        <div class="theme-row">
+          <span class="theme-label">Уязвимые места</span>
+          <div class="theme-btns">
+            <button type="button" data-c="y">Точно ✓</button>
+            <button type="button" data-c="p">Частично</button>
+            <button type="button" data-c="n">Не моё</button>
+          </div>
+        </div>
+        <div class="theme-row">
+          <span class="theme-label">Профессиональные направления</span>
+          <div class="theme-btns">
+            <button type="button" data-c="y">Точно ✓</button>
+            <button type="button" data-c="p">Частично</button>
+            <button type="button" data-c="n">Не моё</button>
+          </div>
+        </div>
+        <div class="theme-row">
+          <span class="theme-label">Рекомендации для родителей</span>
+          <div class="theme-btns">
+            <button type="button" data-c="y">Точно ✓</button>
+            <button type="button" data-c="p">Частично</button>
+            <button type="button" data-c="n">Не моё</button>
+          </div>
+        </div>
+      </div>
+
+      <label>Есть ли что-то важное в характере ребёнка, чего нет в описании?</label>
+      <textarea id="missing" placeholder="Что важно, но не отражено…"></textarea>
+
+      <label>Ваш Telegram (необязательно)</label>
+      <textarea id="tg" placeholder="@username" style="min-height:44px;"></textarea>
+    </div>
+
+    <button type="submit" class="btn-send">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Отправить Ольге
+    </button>
+    <p class="footer-note">Откроется Telegram с готовым сообщением.<br>Нажмите «Отправить» внутри приложения.</p>
+  </form>
+</div>
+
+<script>
+function showChild(idx, btn) {
+  document.querySelectorAll('.child-panel').forEach((p,i) => p.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i === idx));
+}
+
+let rating = 0;
+document.querySelectorAll('.stars span').forEach((s,i) => {
+  s.addEventListener('click', () => {
+    rating = i + 1;
+    document.querySelectorAll('.stars span').forEach((x,j) => x.classList.toggle('on', j <= i));
+  });
+});
+
+document.querySelectorAll('.theme-btns button').forEach(b => {
+  b.addEventListener('click', e => {
+    e.preventDefault();
+    b.closest('.theme-btns').querySelectorAll('button').forEach(x => x.className = '');
+    b.className = 'sel-' + b.dataset.c;
+  });
+});
+
+document.getElementById('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const g = id => document.getElementById(id).value.trim();
+  const children = [...document.querySelectorAll('input[name=child]:checked')].map(x => x.value).join(', ') || '(не выбран)';
+  let themes = '';
+  document.querySelectorAll('.theme-row').forEach(r => {
+    const lbl = r.querySelector('.theme-label').textContent;
+    const sel = r.querySelector('.sel-y,.sel-p,.sel-n');
+    themes += '\n  ' + lbl + ': ' + (sel ? sel.textContent.trim() : '—');
+  });
+  let msg = '📋 ОБРАТНАЯ СВЯЗЬ — Дети Ирины';
+  msg += '\n👦 Про кого: ' + children;
+  if (rating) msg += '\n\n⭐ Точность: ' + rating + '/5';
+  const m = g('matched'); if (m) msg += '\n\n✅ Совпало:\n' + m;
+  const n = g('notmatched'); if (n) msg += '\n\n❌ Не совпало:\n' + n;
+  const s = g('surprised'); if (s) msg += '\n\n💡 Удивило:\n' + s;
+  if (themes.trim()) msg += '\n\n📊 По темам:' + themes;
+  const miss = g('missing'); if (miss) msg += '\n\n🔍 Чего не хватает:\n' + miss;
+  const tg = g('tg'); if (tg) msg += '\n\n📲 TG: ' + tg;
+  window.open('https://t.me/OlgaFleur?text=' + encodeURIComponent(msg), '_blank');
+});
+</script>
+</body>
+</html>
