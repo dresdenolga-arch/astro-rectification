@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Владимир Реп.</title>
+<title>Олег Р.</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #1c1e21; padding: 20px; min-height: 100vh; }
@@ -13,7 +13,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 h1 { font-size: 22px; font-weight: 700; color: #1c1e21; margin-bottom: 6px; }
 .subtitle { font-size: 13px; color: #65676b; line-height: 1.6; }
 
-/* Блок данных карты */
 .chart-meta {
   background: #f7f8fa; border-radius: 12px; padding: 14px 18px;
   margin-bottom: 24px; border: 1px solid #e4e6ea;
@@ -36,6 +35,7 @@ h1 { font-size: 22px; font-weight: 700; color: #1c1e21; margin-bottom: 6px; }
 .desc ul li { font-size: 14px; line-height: 1.65; color: #1c1e21; margin-bottom: 5px; }
 .highlight { background: #f0f4ff; border-left: 3px solid #5b85d4; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 14px; line-height: 1.65; color: #1c1e21; }
 .highlight strong { font-weight: 700; }
+.synastry-note { background: #f3f0ff; border-left: 3px solid #8b5cf6; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 14px; line-height: 1.65; color: #1c1e21; }
 
 label { display: block; font-size: 14px; font-weight: 600; color: #1c1e21; margin-bottom: 5px; margin-top: 14px; }
 .hint { font-size: 12px; color: #8a8d91; margin-bottom: 6px; font-weight: 400; margin-top: -2px; }
@@ -60,9 +60,6 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
 .btn-send { width: 100%; padding: 14px; background: #0088cc; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-send:hover { background: #006ba1; }
 .footer-note { text-align: center; font-size: 12px; color: #8a8d91; margin-top: 12px; line-height: 1.5; }
-.time-info { background: #fff8e1; border-left: 3px solid #ffc107; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: #5d4037; line-height: 1.6; }
-.opt { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; font-weight: normal; color: #1c1e21; margin: 6px 0; cursor: pointer; }
-.opt input { margin-top: 3px; flex-shrink: 0; }
 
 @media (max-width: 480px) {
   .card { padding: 24px 16px; }
@@ -74,43 +71,69 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
 <body>
 <div class="card">
   <div class="header">
-    <div class="emoji">🌟</div>
-    <h1>Владимир Реп.</h1>
+    <div class="emoji">🔭</div>
+    <h1>Олег Р.</h1>
     <p class="subtitle">Ольга составила это описание специально для вас.<br>Прочитайте и поделитесь — что совпало, что нет. Это поможет уточнить карту и сделать прогноз точнее.</p>
   </div>
 
   <div class="chart-meta">
   <div class="chart-meta-title">Данные карты</div>
   <div class="chart-meta-grid">
-    <div class="chart-meta-row"><span class="lbl">По документам:</span><span class="val">09:00 МСК (со слов)</span></div>
-    <div class="chart-meta-row"><span class="lbl">Рабочее время:</span><span class="val">09:05 МСК ✓</span></div>
-    <div class="chart-meta-row"><span class="lbl">Солнце:</span><span class="val">Козерог, 1 дом</span></div>
-    <div class="chart-meta-row"><span class="lbl">АСЦ:</span><span class="val">Стрелец</span></div>
-    <div class="chart-meta-row"><span class="lbl">МС:</span><span class="val">Скорпион</span></div>
+    <div class="chart-meta-row"><span class="lbl">Время рождения:</span><span class="val">20:10 МСК ✓</span></div>
+    <div class="chart-meta-row"><span class="lbl">Ректификация:</span><span class="val">v3.8-final</span></div>
+    <div class="chart-meta-row"><span class="lbl">Солнце:</span><span class="val">Рыбы 20°</span></div>
+    <div class="chart-meta-row"><span class="lbl">АСЦ:</span><span class="val">Весы 10°</span></div>
+    <div class="chart-meta-row"><span class="lbl">МС:</span><span class="val">Рак 13°</span></div>
   </div>
-  <div class="chart-meta-note">Время подтверждено верификацией на 13 событиях жизни (93% совпадений).</div>
+  <div class="chart-meta-note">Ректификация подтверждена на ключевых событиях жизни. Время 20:10 — рабочая карта.</div>
 </div>
 
   <div class="section">
     <div class="section-title">Ваше описание</div>
     <div class="desc">
-<p>Владимир — человек, которому нужен масштаб. Лучше всего себя чувствует в движении: новые города, задачи, горизонты, люди. Когда этого нет — не просто скучает, а буквально увядает. Стабильность без роста для него не отдых, а медленное угасание.</p>
+<p>Олег производит впечатление человека собранного, взрослого, практичного и достаточно сдержанного. В нём есть ощущение внутреннего стержня: он не из тех, кто любит пустые разговоры, хаос и неопределённость. Ему важно понимать, что происходит, зачем это нужно и какой будет конкретный результат.</p>
 
-<p>По природе — строитель и первопроходец. Берёт то, чего ещё нет, создаёт с нуля, выстраивает систему — и когда она начинает работать сама, интерес гаснет. Именно поэтому 26 лет на одном месте в найме (с апреля 2000 по май 2026) сочетались с параллельным бизнесом: купил производство, поднял, продал. Продажа — не потеря, это завершение его нормального цикла.</p>
+<p>При этом за внешней корректностью может быть довольно сильный характер. Он может быть спокойным и дипломатичным, пока ситуация остаётся понятной. Но если появляется ощущение несправедливости, давления или мутных правил — может становиться резче и прямее.</p>
 
-<div class="highlight"><strong>Глубокая потребность в признании — конкретном.</strong> Не в комплиментах и не в лести. Ему важно, чтобы люди обращались к нему за мнением по существу, доверяли его суждению в реальных вопросах, слушали когда он говорит. Когда это есть — он генерирует, предлагает, тащит вперёд. Когда нет — уходит туда, где его будут слышать.</div>
+<h3>Сильные стороны</h3>
+<ul>
+<li>Сильная практическая хватка — смотрит на жизнь через реальные вещи: дом, деньги, обязательства, безопасность семьи, материальная база</li>
+<li>Надёжность в кризисах — когда другим тревожно или непонятно, способен собраться, оценить ситуацию и начать действовать</li>
+<li>Профессионализм — ему важно быть не просто занятым, а нужным и эффективным</li>
+<li>Способность строить базу — дом, имущество, семейная устойчивость, финансовая опора важны как ощущение контроля над жизнью</li>
+<li>Умение выдерживать давление, особенно когда понимает, ради чего это делает</li>
+</ul>
 
-<p>Финансы для него — не цель и не мерило успеха, а топливо для следующего проекта. Деньги пришли — хорошо, ушли в новую идею — тоже нормально. Именно поэтому потери 2018 и 2026 годов болезненны, но не сломают: они воспринимаются как временная остановка, а не как конец.</p>
+<h3>Уязвимые места</h3>
+<ul>
+<li>Напряжение от неопределённости — когда нет ясных правил, сроков или договорённостей, внутри может нарастать тревога, которую снаружи не видно</li>
+<li>Склонность решать эмоциональные вопросы практическими действиями — вместо разговора о чувствах начинает решать быт, дела, планы</li>
+<li>Давление скоростью или тоном — иногда хочет быстрее убрать неопределённость, и это может ощущаться как жёсткость</li>
+<li>Потребность в личном пространстве и самостоятельности: если чувствует, что его ограничивают — может включаться внутренний протест</li>
+</ul>
 
-<h3>Музыка — не хобби, а второй язык</h3>
-<p>Это то, на чём он говорит о том, о чём не говорит словами. Показательно: диск был записан в декабре 2012 — сразу после закрытия долгов и продажи бизнеса. Первая собственная песня написана в январе 2026 — в момент, когда рухнула работа. Каждый раз, когда жизнь проходила через серьёзный перелом, музыка появлялась. Это не случайность, это его способ переработать то, что иначе не переваривается.</p>
+<div class="highlight"><strong>Ключевое в характере:</strong> Олегу важны уважение и прямота. Он легче переносит сложный разговор с ясностью, чем мягкую неопределённость, где непонятно, что человек на самом деле думает. Для него ясность — не грубость, а честность.</div>
 
-<h3>Отношения и партнёрство</h3>
-<p>Ему нужен не просто близкий человек — а равный по уровню. Тот, кому он может доверять не только эмоционально, но и как партнёру в мышлении и в жизни. Когда такой человек рядом — он раскрывается полностью: поддерживает, строит, вкладывается. В одиночку — и внешне справляется, но внутренний ресурс расходуется намного быстрее.</p>
+<h3>В отношениях</h3>
+<p>Ему важно уважение к его вкладу, решениям и опыту. В близком кругу может быть очень надёжным и последовательным — но ожидает той же прямоты в ответ. Если что-то не так — лучше сказать прямо, чем намекать.</p>
 
-<p>Три детей, два брака, новый круг через регату в 2010-м — это не разбросанность, это человек, который ищет свой мир и свою команду, меняя декорации, пока не найдёт то, что совпадает.</p>
+<h3>В работе и деньгах</h3>
+<p>Лучше работает с чёткими условиями: кто, что, когда, за что несёт ответственность. Мутные договорённости создают внутреннее напряжение. Его энергия лучше работает, когда есть понятные задачи с конкретным результатом и пространство для собственных решений.</p>
+</div>
+  </div>
 
-<div class="highlight"><strong>Ключевое наблюдение:</strong> он умеет держать длинные обязательства — 26 лет на одном месте это доказывают. Но только если там есть пространство для его инициативы и рост. Без этого — даже самое надёжное место становится клеткой.</div>
+  <div class="section">
+    <div class="section-title">💑 Про нас двоих — несколько наблюдений</div>
+    <div class="desc">
+<div class="synastry-note">Это не оценка и не диагноз — просто несколько структурных наблюдений про то, как работают наши карты вместе. Откликается или нет — важно услышать.</div>
+
+<p><strong>Взаимная идеализация встроена в карты.</strong> Оба видят друг друга через нептунианский фильтр — есть что-то ускользающее, «больше, чем есть». Это источник глубины и ощущения «понимаем без слов», но также объясняет, почему иногда возникает разрыв между образом и реальностью.</p>
+
+<p><strong>Плутон Ольги — на ASC Олега.</strong> Её присутствие трансформирует то, как он себя предъявляет миру. В её присутствии он становится другим человеком — глубже, честнее с собой. Это может ощущаться как «она видит меня насквозь».</p>
+
+<p><strong>Зоны напряжения — структурные, не личные.</strong> Когда она активно действует и не получает прямой реакции — это не игнор: его Плутон перерабатывает её сигнал глубоко, просто незаметно снаружи. Когда он нуждается в постоянстве, а в жизни появляется неожиданное — это тоже структура карт, не злой умысел.</p>
+
+<p><strong>Где легче всего:</strong> коммуникация и быт. Её Луна и его Меркурий резонируют без усилий — это редкость и ценность.</p>
 </div>
   </div>
 
@@ -136,10 +159,10 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
       <div class="themes">
   <div class="theme-row"><span class="theme-label">Характер и личность</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
   <div class="theme-row"><span class="theme-label">Работа и реализация</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
-  <div class="theme-row"><span class="theme-label">Деньги и финансы</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
-  <div class="theme-row"><span class="theme-label">Отношения</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
-  <div class="theme-row"><span class="theme-label">Семья / близкие</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
-  <div class="theme-row"><span class="theme-label">Внутренние переживания</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+  <div class="theme-row"><span class="theme-label">Деньги и материальное</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+  <div class="theme-row"><span class="theme-label">Отношения и близость</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+  <div class="theme-row"><span class="theme-label">Семья и дом</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+  <div class="theme-row"><span class="theme-label">Наблюдения про нас двоих</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
 </div>
 
       <label>Есть ли что-то важное в вашей жизни, чего нет в описании?</label>
@@ -147,22 +170,6 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
 
       <label>Ваш Telegram (необязательно)</label>
       <input type="text" id="tg" placeholder="@username">
-    </div>
-
-    <div class="section">
-      <div class="section-title">⏱ Уточнение о времени рождения</div>
-      <div class="time-info">Время рождения записано как <strong>09:00 МСК</strong>. Точность прогноза зависит от точности времени — даже 5–10 минут могут сдвинуть ключевые позиции карты.</div>
-
-      <label>Откуда известно время рождения?</label>
-      <div style="margin-top:6px;">
-        <label class="opt"><input type="radio" name="tsrc" value="doc"> Из документа (свидетельство о рождении, справка)</label>
-        <label class="opt"><input type="radio" name="tsrc" value="mom"> Со слов мамы / родителей</label>
-        <label class="opt"><input type="radio" name="tsrc" value="approx"> Приблизительно (±30 мин и больше)</label>
-        <label class="opt"><input type="radio" name="tsrc" value="unknown"> Точно не знаю</label>
-      </div>
-
-      <label>Есть документ под рукой или можете уточнить точность?</label>
-      <textarea id="time_note" placeholder="Любые детали помогут — например: «В свидетельстве написано 9:00» или «Мама говорит, что утром, но точно не помнит»…"></textarea>
     </div>
 
     <button type="submit" class="btn-send">
@@ -175,7 +182,7 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
     <p class="footer-note">Откроется Telegram с готовым сообщением.<br>Нажмите «Отправить» внутри приложения.</p>
   </form>
 </div>
-<script>const PNAME = 'Владимир Реп.';
+<script>const PNAME = 'Олег Р.';
 
 let rating = 0;
 document.querySelectorAll('.stars span').forEach((s,i) => {
@@ -208,10 +215,6 @@ document.getElementById('form').addEventListener('submit', function(e) {
   if (themes.trim()) msg += '\n\n📊 По темам:' + themes;
   const miss = g('missing'); if (miss) msg += '\n\n🔍 Чего не хватает:\n' + miss;
   const tg = g('tg'); if (tg) msg += '\n\n📲 TG: ' + tg;
-  const tsrc = document.querySelector('input[name=tsrc]:checked');
-  const timen = g('time_note');
-  const srcMap = {doc:'документ',mom:'со слов мамы',approx:'приблизительно',unknown:'не знаю'};
-  if (tsrc || timen) { msg += '\n\n⏱ Время рождения:'; if (tsrc) msg += ' ' + srcMap[tsrc.value]; if (timen) msg += '\n' + timen; }
   window.open('https://t.me/OlgaFleur?text=' + encodeURIComponent(msg), '_blank');
 });
 </script>

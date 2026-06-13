@@ -60,6 +60,9 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
 .btn-send { width: 100%; padding: 14px; background: #0088cc; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-send:hover { background: #006ba1; }
 .footer-note { text-align: center; font-size: 12px; color: #8a8d91; margin-top: 12px; line-height: 1.5; }
+.time-info { background: #fff8e1; border-left: 3px solid #ffc107; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: #5d4037; line-height: 1.6; }
+.opt { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; font-weight: normal; color: #1c1e21; margin: 6px 0; cursor: pointer; }
+.opt input { margin-top: 3px; flex-shrink: 0; }
 
 @media (max-width: 480px) {
   .card { padding: 24px 16px; }
@@ -79,13 +82,13 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
   <div class="chart-meta">
   <div class="chart-meta-title">Данные карты</div>
   <div class="chart-meta-grid">
-    <div class="chart-meta-row"><span class="lbl">По документам:</span><span class="val">06:05 МСК</span></div>
-    <div class="chart-meta-row"><span class="lbl">Ректифицировано:</span><span class="val">05:37 МСК (−28 мин)</span></div>
+    <div class="chart-meta-row"><span class="lbl">Время рождения:</span><span class="val">06:05 МСК ✓</span></div>
+    <div class="chart-meta-row"><span class="lbl">Источник:</span><span class="val">запись роддома</span></div>
     <div class="chart-meta-row"><span class="lbl">Солнце:</span><span class="val">Телец, 12 дом</span></div>
-    <div class="chart-meta-row"><span class="lbl">АСЦ:</span><span class="val">Близнецы</span></div>
-    <div class="chart-meta-row"><span class="lbl">МС:</span><span class="val">Козерог</span></div>
+    <div class="chart-meta-row"><span class="lbl">АСЦ:</span><span class="val">Близнецы 12°</span></div>
+    <div class="chart-meta-row"><span class="lbl">МС:</span><span class="val">Водолей 2°</span></div>
   </div>
-  <div class="chart-meta-note">Ректификация подтверждена на 6/8 ключевых событий. Время 05:37 — наиболее вероятное.</div>
+  <div class="chart-meta-note">Время подтверждено верификацией. Хорошая степень уверенности — запись роддома совпадает с ключевыми событиями жизни.</div>
 </div>
 
   <div class="section">
@@ -149,6 +152,22 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
       <input type="text" id="tg" placeholder="@username">
     </div>
 
+    <div class="section">
+      <div class="section-title">⏱ Уточнение о времени рождения</div>
+      <div class="time-info">Время рождения — <strong>06:05 МСК</strong> из записи роддома. Хотим убедиться, что документ под рукой или данные точно подтверждены.</div>
+
+      <label>Есть ли у вас документ с записью времени?</label>
+      <div style="margin-top:6px;">
+        <label class="opt"><input type="radio" name="tsrc" value="doc"> Да, в свидетельстве о рождении написано время</label>
+        <label class="opt"><input type="radio" name="tsrc" value="mom"> Нет документа, со слов мамы / родителей</label>
+        <label class="opt"><input type="radio" name="tsrc" value="approx"> Время приблизительное (±30 мин и больше)</label>
+        <label class="opt"><input type="radio" name="tsrc" value="unknown"> Не уверена</label>
+      </div>
+
+      <label>Любые детали про время:</label>
+      <textarea id="time_note" placeholder="Например: «В свидетельстве написано точно» или «Мама говорит ночью, но времени нет»…"></textarea>
+    </div>
+
     <button type="submit" class="btn-send">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -192,6 +211,10 @@ document.getElementById('form').addEventListener('submit', function(e) {
   if (themes.trim()) msg += '\n\n📊 По темам:' + themes;
   const miss = g('missing'); if (miss) msg += '\n\n🔍 Чего не хватает:\n' + miss;
   const tg = g('tg'); if (tg) msg += '\n\n📲 TG: ' + tg;
+  const tsrc = document.querySelector('input[name=tsrc]:checked');
+  const timen = g('time_note');
+  const srcMap = {doc:'документ есть',mom:'со слов мамы',approx:'приблизительно',unknown:'не уверена'};
+  if (tsrc || timen) { msg += '\n\n⏱ Время рождения:'; if (tsrc) msg += ' ' + srcMap[tsrc.value]; if (timen) msg += '\n' + timen; }
   window.open('https://t.me/OlgaFleur?text=' + encodeURIComponent(msg), '_blank');
 });
 </script>

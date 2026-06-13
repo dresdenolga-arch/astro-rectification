@@ -60,6 +60,9 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
 .btn-send { width: 100%; padding: 14px; background: #0088cc; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-send:hover { background: #006ba1; }
 .footer-note { text-align: center; font-size: 12px; color: #8a8d91; margin-top: 12px; line-height: 1.5; }
+.time-info { background: #fff8e1; border-left: 3px solid #ffc107; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: #5d4037; line-height: 1.6; }
+.opt { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; font-weight: normal; color: #1c1e21; margin: 6px 0; cursor: pointer; }
+.opt input { margin-top: 3px; flex-shrink: 0; }
 
 @media (max-width: 480px) {
   .card { padding: 24px 16px; }
@@ -173,6 +176,22 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
       <input type="text" id="tg" placeholder="@username">
     </div>
 
+    <div class="section">
+      <div class="section-title">⏱ Уточнение о времени рождения</div>
+      <div class="time-info">По расчётам наиболее вероятное время рождения — <strong>01:50–01:53 МСК</strong>. Это важно: от этих минут зависит положение АСЦ и МС карты. Помогите уточнить!</div>
+
+      <label>Откуда известно время рождения?</label>
+      <div style="margin-top:6px;">
+        <label class="opt"><input type="radio" name="tsrc" value="doc"> Из документа (свидетельство о рождении, справка роддома)</label>
+        <label class="opt"><input type="radio" name="tsrc" value="mom"> Со слов мамы / родителей</label>
+        <label class="opt"><input type="radio" name="tsrc" value="approx"> Приблизительно (±30 мин и больше)</label>
+        <label class="opt"><input type="radio" name="tsrc" value="unknown"> Точно не знаю</label>
+      </div>
+
+      <label>Есть ли документ или можно уточнить у мамы, какое именно время?</label>
+      <textarea id="time_note" placeholder="Это важно — любое уточнение поможет. Например: «В свидетельстве 01:50» или «Мама говорит, глубокая ночь, но числа уже было второе»…"></textarea>
+    </div>
+
     <button type="submit" class="btn-send">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -216,6 +235,10 @@ document.getElementById('form').addEventListener('submit', function(e) {
   if (themes.trim()) msg += '\n\n📊 По темам:' + themes;
   const miss = g('missing'); if (miss) msg += '\n\n🔍 Чего не хватает:\n' + miss;
   const tg = g('tg'); if (tg) msg += '\n\n📲 TG: ' + tg;
+  const tsrc = document.querySelector('input[name=tsrc]:checked');
+  const timen = g('time_note');
+  const srcMap = {doc:'документ',mom:'со слов мамы',approx:'приблизительно',unknown:'не знаю'};
+  if (tsrc || timen) { msg += '\n\n⏱ Время рождения:'; if (tsrc) msg += ' ' + srcMap[tsrc.value]; if (timen) msg += '\n' + timen; }
   window.open('https://t.me/OlgaFleur?text=' + encodeURIComponent(msg), '_blank');
 });
 </script>

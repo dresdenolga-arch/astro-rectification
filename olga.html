@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ольга Д.</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #1c1e21; padding: 20px; min-height: 100vh; }
+.card { max-width: 640px; margin: 0 auto; background: white; border-radius: 16px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.header { text-align: center; margin-bottom: 24px; }
+.header .emoji { font-size: 40px; margin-bottom: 8px; }
+h1 { font-size: 22px; font-weight: 700; color: #1c1e21; margin-bottom: 6px; }
+.subtitle { font-size: 13px; color: #65676b; line-height: 1.6; }
+
+.chart-meta {
+  background: #f7f8fa; border-radius: 12px; padding: 14px 18px;
+  margin-bottom: 24px; border: 1px solid #e4e6ea;
+}
+.chart-meta-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #8a8d91; margin-bottom: 10px; }
+.chart-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+.chart-meta-row { display: flex; gap: 6px; font-size: 13px; }
+.chart-meta-row .lbl { color: #8a8d91; white-space: nowrap; }
+.chart-meta-row .val { color: #1c1e21; font-weight: 600; }
+.chart-meta-note { font-size: 12px; color: #8a8d91; margin-top: 8px; font-style: italic; }
+
+.section { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e4e6ea; }
+.section:last-of-type { border-bottom: none; }
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #65676b; margin-bottom: 16px; }
+
+.desc p { font-size: 15px; line-height: 1.75; color: #1c1e21; margin-bottom: 14px; }
+.desc p:last-child { margin-bottom: 0; }
+.desc h3 { font-size: 14px; font-weight: 700; color: #1c1e21; margin: 20px 0 8px; }
+.desc ul { padding-left: 20px; margin-bottom: 12px; }
+.desc ul li { font-size: 14px; line-height: 1.65; color: #1c1e21; margin-bottom: 5px; }
+.highlight { background: #f0f4ff; border-left: 3px solid #5b85d4; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 14px; line-height: 1.65; color: #1c1e21; }
+.highlight strong { font-weight: 700; }
+.forecast-block { background: #f0fdf4; border-left: 3px solid #22c55e; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 10px 0; font-size: 14px; line-height: 1.65; color: #1c1e21; }
+.forecast-block .period { font-weight: 700; font-size: 13px; color: #15803d; margin-bottom: 4px; }
+.forecast-block.warn { background: #fff7ed; border-left-color: #f97316; }
+.forecast-block.warn .period { color: #c2410c; }
+.forecast-block.peak { background: #fef3c7; border-left-color: #d97706; }
+.forecast-block.peak .period { color: #92400e; }
+
+label { display: block; font-size: 14px; font-weight: 600; color: #1c1e21; margin-bottom: 5px; margin-top: 14px; }
+.hint { font-size: 12px; color: #8a8d91; margin-bottom: 6px; font-weight: 400; margin-top: -2px; }
+textarea, input[type=text] { width: 100%; padding: 10px 13px; border: 1.5px solid #dddfe2; border-radius: 8px; font-size: 14px; color: #1c1e21; background: #f7f8fa; margin-top: 6px; transition: border-color 0.2s; font-family: inherit; }
+textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; background: white; }
+
+.stars { display: flex; gap: 10px; margin-top: 8px; font-size: 30px; }
+.stars span { cursor: pointer; transition: transform 0.1s; user-select: none; opacity: 0.3; }
+.stars span.on { opacity: 1; transform: scale(1.1); }
+
+.themes { margin-top: 8px; }
+.theme-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f2f5; gap: 8px; }
+.theme-row:last-child { border-bottom: none; }
+.theme-label { font-size: 14px; color: #1c1e21; flex: 1; }
+.theme-btns { display: flex; gap: 5px; flex-shrink: 0; }
+.theme-btns button { padding: 5px 11px; border: 1.5px solid #dddfe2; border-radius: 20px; font-size: 12px; cursor: pointer; background: white; color: #65676b; transition: all 0.15s; font-family: inherit; }
+.theme-btns button.sel-y { border-color: #4caf50; background: #e8f5e9; color: #2e7d32; font-weight: 600; }
+.theme-btns button.sel-p { border-color: #ff9800; background: #fff3e0; color: #e65100; font-weight: 600; }
+.theme-btns button.sel-n { border-color: #f44336; background: #ffebee; color: #c62828; font-weight: 600; }
+
+.btn-send { width: 100%; padding: 14px; background: #0088cc; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-send:hover { background: #006ba1; }
+.footer-note { text-align: center; font-size: 12px; color: #8a8d91; margin-top: 12px; line-height: 1.5; }
+
+@media (max-width: 480px) {
+  .card { padding: 24px 16px; }
+  .chart-meta-grid { grid-template-columns: 1fr; }
+  .theme-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="emoji">🌙</div>
+    <h1>Ольга Д.</h1>
+    <p class="subtitle">Описание личности и прогноз 2026.<br>Прочитайте — что совпало с тем, что уже происходит. Это верификация прогноза в реальном времени.</p>
+  </div>
+
+  <div class="chart-meta">
+  <div class="chart-meta-title">Данные карты</div>
+  <div class="chart-meta-grid">
+    <div class="chart-meta-row"><span class="lbl">Время рождения:</span><span class="val">19:42 МСК ✓</span></div>
+    <div class="chart-meta-row"><span class="lbl">Ректификация:</span><span class="val">v3.8-final (+2 мин)</span></div>
+    <div class="chart-meta-row"><span class="lbl">Солнце:</span><span class="val">Весы 29°</span></div>
+    <div class="chart-meta-row"><span class="lbl">АСЦ:</span><span class="val">Близнецы 5°</span></div>
+    <div class="chart-meta-row"><span class="lbl">МС:</span><span class="val">Водолей 4°</span></div>
+  </div>
+  <div class="chart-meta-note">Карта верифицирована. Уран движется к АСЦ (пик август 2026), Плутон — на МС весь год.</div>
+</div>
+
+  <div class="section">
+    <div class="section-title">Ваше описание</div>
+    <div class="desc">
+<p>Ольга производит впечатление человека лёгкого в общении, гибкого, спокойного и достаточно рационального. Но это не значит, что внутри у неё всё так же легко. Скорее наоборот: у неё очень тонкая чувствительность к атмосфере, словам, интонациям, настроению других людей. Она может многое считывать между строк и часто понимает больше, чем показывает.</p>
+
+<p>Внешне она может выглядеть собранной, нормальной, даже невозмутимой — но внутри в это время может идти сильная переработка: мысли, сомнения, переживания, анализ ситуации. Поэтому окружающие могут недооценивать, насколько она устала или насколько глубоко её что-то задело.</p>
+
+<h3>Сильные стороны</h3>
+<ul>
+<li>Сильный ум, наблюдательность, способность быстро адаптироваться</li>
+<li>Хорошо чувствует людей, видит нюансы, умеет находить правильный тон</li>
+<li>Хороший вкус, чувство меры, умение делать пространство более аккуратным и удобным</li>
+<li>Замечает то, что другие пропускают — сильна в анализе, коммуникации, работе с качеством</li>
+<li>Внутренняя живучесть: умеет собираться в сложные периоды без внешней драмы</li>
+</ul>
+
+<h3>Уязвимые места</h3>
+<ul>
+<li>Перегруз нервной системы — может слишком много думать, слишком много чувствовать и при этом продолжать функционировать. Усталость накапливается незаметно.</li>
+<li>Трудно прямо сказать «мне тяжело» — сначала пытается быть разумной, гибкой, понимающей</li>
+<li>Склонность жить через работу и полезность: может продолжать делать даже когда ресурса уже мало</li>
+<li>Тяжело переносит грубость, давление и эмоциональную глухоту — но сама не сразу показывает, насколько задело</li>
+</ul>
+
+<div class="highlight"><strong>Ключевое:</strong> Ольге важно, чтобы рядом было не только «правильно», но и психологически безопасно. Ей нужна возможность выдохнуть, побыть в тишине, восстановиться — не объяснять каждую реакцию и не быть всё время включённой. Ей не нужно становиться более жёсткой. Ей нужно бережнее обращаться со своей чувствительностью.</div>
+</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📅 Прогноз 2026 — что должно было происходить</div>
+    <div class="desc">
+<p style="font-size:13px; color:#65676b; margin-bottom:16px;">Это прогноз, составленный заранее. Сейчас — июнь 2026. Отметьте, что совпало с реальностью.</p>
+
+    <div class="forecast-block warn">
+      <div class="period">Январь–Февраль</div>
+      Напряжение в карьере. Трансформация на уровне статуса, роли, позиции. Нептун создавал размытость целей. Период наблюдения, не действий.
+    </div>
+
+    <div class="forecast-block warn">
+      <div class="period">Март</div>
+      Пик усталости / риска истощения. Нептун квадратирует Марс (орб 0.2°). Важно было беречь себя.
+    </div>
+
+    <div class="forecast-block">
+      <div class="period">Апрель — важный старт</div>
+      Прогрессированная Луна на АСЦ (орб 0.9°) — запуск нового личного цикла. Также: смена руководителя (03.04) — подтверждено Solar Arc. Начало нового этапа в профессиональной сфере.
+    </div>
+
+    <div class="forecast-block warn">
+      <div class="period">Май–Июнь</div>
+      Сатурн оппозирует Меркурий — серьёзные договорённости, документы, переговоры. В июне Solar Arc Уран и Марс оба на углах карты одновременно (орб &lt;0.6°) — значимое событие в работе или личном.
+    </div>
+
+    <div class="forecast-block peak">
+      <div class="period">Июль–Август — пик года</div>
+      Уран точно на АСЦ (орб 0.1° в августе). Неожиданные перемены, новые люди или роли. Юпитер расширяет профессиональные возможности. Лучшее время для важных шагов.
+    </div>
+
+    <div class="forecast-block">
+      <div class="period">Октябрь — лучший месяц</div>
+      Прогрессированная Луна трин натальной Луне в 10 доме (орб 0.4°) — профессиональный успех. Лучшее окно года для карьерных решений.
+    </div>
+
+    <div class="forecast-block warn">
+      <div class="period">Ноябрь–Декабрь</div>
+      Завершение трансформации карьеры (Плутон на МС финал). Усталость — беречь силы. Подводить итоги, не начинать новое.
+    </div>
+</div>
+  </div>
+
+  <form id="form">
+    <div class="section">
+      <div class="section-title">Обратная связь по описанию</div>
+
+      <label>Насколько точно описание личности в целом?</label>
+      <div class="stars"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+
+      <label>Что описано очень точно?</label>
+      <div class="hint">Что узнали себя с первого прочтения</div>
+      <textarea id="matched" placeholder="Можете процитировать фразу или описать своими словами…"></textarea>
+
+      <label>Что НЕ совпало или показалось неверным?</label>
+      <div class="hint">Это так же важно, как совпадения</div>
+      <textarea id="notmatched" placeholder="Что вообще не похоже на вас…"></textarea>
+
+      <label>По темам описания:</label>
+      <div class="themes">
+  <div class="theme-row"><span class="theme-label">Характер и личность</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+  <div class="theme-row"><span class="theme-label">Чувствительность и усталость</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+  <div class="theme-row"><span class="theme-label">Работа и полезность</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+  <div class="theme-row"><span class="theme-label">Отношения и близость</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
+</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Верификация прогноза 2026</div>
+
+      <label>Что из прогноза уже произошло? (январь–июнь 2026)</label>
+      <div class="hint">Опишите события или ощущения, которые совпали с описанием периодов</div>
+      <textarea id="forecast_match" placeholder="Например: «В апреле действительно что-то изменилось в работе» или «Март был очень тяжёлым по состоянию»…"></textarea>
+
+      <label>Что из прогноза НЕ совпало?</label>
+      <textarea id="forecast_miss" placeholder="Что предсказывалось, но не произошло или произошло иначе…"></textarea>
+
+      <label>Что не было в прогнозе, но случилось?</label>
+      <textarea id="forecast_extra" placeholder="Важные события января–июня, которые прогноз не предвидел…"></textarea>
+
+      <label>Ваш Telegram (необязательно)</label>
+      <input type="text" id="tg" placeholder="@username">
+    </div>
+
+    <button type="submit" class="btn-send">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Отправить
+    </button>
+    <p class="footer-note">Откроется Telegram с готовым сообщением.<br>Нажмите «Отправить» внутри приложения.</p>
+  </form>
+</div>
+<script>const PNAME = 'Ольга Д.';
+
+let rating = 0;
+document.querySelectorAll('.stars span').forEach((s,i) => {
+  s.addEventListener('click', () => {
+    rating = i+1;
+    document.querySelectorAll('.stars span').forEach((x,j) => x.classList.toggle('on', j<=i));
+  });
+});
+document.querySelectorAll('.theme-btns button').forEach(b => {
+  b.addEventListener('click', e => {
+    e.preventDefault();
+    b.closest('.theme-btns').querySelectorAll('button').forEach(x => x.className = '');
+    b.className = 'sel-' + b.dataset.c;
+  });
+});
+document.getElementById('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const g = id => document.getElementById(id).value.trim();
+  let themes = '';
+  document.querySelectorAll('.theme-row').forEach(r => {
+    const lbl = r.querySelector('.theme-label').textContent;
+    const sel = r.querySelector('.sel-y,.sel-p,.sel-n');
+    themes += '\n  ' + lbl + ': ' + (sel ? sel.textContent.trim() : '—');
+  });
+  let msg = '📋 ВЕРИФИКАЦИЯ — ' + PNAME;
+  if (rating) msg += '\n\n⭐ Точность описания: ' + rating + '/5';
+  const m = g('matched'); if (m) msg += '\n\n✅ Совпало в описании:\n' + m;
+  const n = g('notmatched'); if (n) msg += '\n\n❌ Не совпало:\n' + n;
+  if (themes.trim()) msg += '\n\n📊 По темам:' + themes;
+  const fm = g('forecast_match'); if (fm) msg += '\n\n📅 Прогноз совпал:\n' + fm;
+  const fmi = g('forecast_miss'); if (fmi) msg += '\n\n📅 Прогноз не совпал:\n' + fmi;
+  const fe = g('forecast_extra'); if (fe) msg += '\n\n📅 Не в прогнозе, но случилось:\n' + fe;
+  const tg = g('tg'); if (tg) msg += '\n\n📲 TG: ' + tg;
+  window.open('https://t.me/OlgaFleur?text=' + encodeURIComponent(msg), '_blank');
+});
+</script>
+</body>
+</html>
