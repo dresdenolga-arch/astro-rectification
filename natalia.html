@@ -6,79 +6,64 @@
 <title>Наталья Кис.</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f0f2f5; color: #1c1e21; padding: 20px; min-height: 100vh;
-}
-.card {
-  max-width: 640px; margin: 0 auto; background: white;
-  border-radius: 16px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.header { text-align: center; margin-bottom: 28px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #1c1e21; padding: 20px; min-height: 100vh; }
+.card { max-width: 640px; margin: 0 auto; background: white; border-radius: 16px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.header { text-align: center; margin-bottom: 24px; }
 .header .emoji { font-size: 40px; margin-bottom: 8px; }
 h1 { font-size: 22px; font-weight: 700; color: #1c1e21; margin-bottom: 6px; }
 .subtitle { font-size: 13px; color: #65676b; line-height: 1.6; }
 
+/* Блок данных карты */
+.chart-meta {
+  background: #f7f8fa; border-radius: 12px; padding: 14px 18px;
+  margin-bottom: 24px; border: 1px solid #e4e6ea;
+}
+.chart-meta-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #8a8d91; margin-bottom: 10px; }
+.chart-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+.chart-meta-row { display: flex; gap: 6px; font-size: 13px; }
+.chart-meta-row .lbl { color: #8a8d91; white-space: nowrap; }
+.chart-meta-row .val { color: #1c1e21; font-weight: 600; }
+.chart-meta-note { font-size: 12px; color: #8a8d91; margin-top: 8px; font-style: italic; }
+
 .section { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e4e6ea; }
 .section:last-of-type { border-bottom: none; }
-.section-title {
-  font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.8px; color: #65676b; margin-bottom: 16px;
-}
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #65676b; margin-bottom: 16px; }
 
 .desc p { font-size: 15px; line-height: 1.75; color: #1c1e21; margin-bottom: 14px; }
 .desc p:last-child { margin-bottom: 0; }
 .desc h3 { font-size: 14px; font-weight: 700; color: #1c1e21; margin: 20px 0 8px; }
 .desc ul { padding-left: 20px; margin-bottom: 12px; }
 .desc ul li { font-size: 14px; line-height: 1.65; color: #1c1e21; margin-bottom: 5px; }
-.highlight {
-  background: #f0f4ff; border-left: 3px solid #5b85d4;
-  border-radius: 0 8px 8px 0; padding: 12px 16px;
-  margin: 14px 0; font-size: 14px; line-height: 1.65; color: #1c1e21;
-}
+.highlight { background: #f0f4ff; border-left: 3px solid #5b85d4; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 14px; line-height: 1.65; color: #1c1e21; }
+.highlight strong { font-weight: 700; }
 
 label { display: block; font-size: 14px; font-weight: 600; color: #1c1e21; margin-bottom: 5px; margin-top: 14px; }
 .hint { font-size: 12px; color: #8a8d91; margin-bottom: 6px; font-weight: 400; margin-top: -2px; }
-textarea, input[type=text] {
-  width: 100%; padding: 10px 13px; border: 1.5px solid #dddfe2;
-  border-radius: 8px; font-size: 14px; color: #1c1e21; background: #f7f8fa;
-  margin-top: 6px; transition: border-color 0.2s; font-family: inherit;
-}
+textarea, input[type=text] { width: 100%; padding: 10px 13px; border: 1.5px solid #dddfe2; border-radius: 8px; font-size: 14px; color: #1c1e21; background: #f7f8fa; margin-top: 6px; transition: border-color 0.2s; font-family: inherit; }
 textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
 textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; background: white; }
 
 .stars { display: flex; gap: 10px; margin-top: 8px; font-size: 30px; }
-.stars span { cursor: pointer; transition: transform 0.1s; user-select: none; opacity: 0.35; }
-.stars span:hover, .stars span.on { opacity: 1; transform: scale(1.15); }
+.stars span { cursor: pointer; transition: transform 0.1s; user-select: none; opacity: 0.3; }
+.stars span.on { opacity: 1; transform: scale(1.1); }
 
 .themes { margin-top: 8px; }
-.theme-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 0; border-bottom: 1px solid #f0f2f5; gap: 8px;
-}
+.theme-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f2f5; gap: 8px; }
 .theme-row:last-child { border-bottom: none; }
 .theme-label { font-size: 14px; color: #1c1e21; }
 .theme-btns { display: flex; gap: 5px; flex-shrink: 0; }
-.theme-btns button {
-  padding: 5px 11px; border: 1.5px solid #dddfe2; border-radius: 20px;
-  font-size: 12px; cursor: pointer; background: white; color: #65676b;
-  transition: all 0.15s; font-family: inherit; white-space: nowrap;
-}
-.theme-btns button.sel-y { border-color: #4caf50; background: #e8f5e9; color: #2e7d32; font-weight:600; }
-.theme-btns button.sel-p { border-color: #ff9800; background: #fff3e0; color: #e65100; font-weight:600; }
-.theme-btns button.sel-n { border-color: #f44336; background: #ffebee; color: #c62828; font-weight:600; }
+.theme-btns button { padding: 5px 11px; border: 1.5px solid #dddfe2; border-radius: 20px; font-size: 12px; cursor: pointer; background: white; color: #65676b; transition: all 0.15s; font-family: inherit; }
+.theme-btns button.sel-y { border-color: #4caf50; background: #e8f5e9; color: #2e7d32; font-weight: 600; }
+.theme-btns button.sel-p { border-color: #ff9800; background: #fff3e0; color: #e65100; font-weight: 600; }
+.theme-btns button.sel-n { border-color: #f44336; background: #ffebee; color: #c62828; font-weight: 600; }
 
-.btn-send {
-  width: 100%; padding: 14px; background: #0088cc; color: white;
-  border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
-  cursor: pointer; margin-top: 20px; transition: background 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-}
+.btn-send { width: 100%; padding: 14px; background: #0088cc; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-send:hover { background: #006ba1; }
 .footer-note { text-align: center; font-size: 12px; color: #8a8d91; margin-top: 12px; line-height: 1.5; }
 
 @media (max-width: 480px) {
   .card { padding: 24px 16px; }
+  .chart-meta-grid { grid-template-columns: 1fr; }
   .theme-row { flex-direction: column; align-items: flex-start; }
 }
 </style>
@@ -88,33 +73,44 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
   <div class="header">
     <div class="emoji">✨</div>
     <h1>Наталья Кис.</h1>
-    <p class="subtitle">Ольга составила это описание специально для вас.<br>Прочитайте и поделитесь обратной связью — что совпало, что нет.<br>Это займёт 5–7 минут и очень поможет уточнить карту.</p>
+    <p class="subtitle">Ольга составила это описание специально для вас.<br>Прочитайте и поделитесь — что совпало, что нет. Это поможет уточнить карту и сделать прогноз точнее.</p>
   </div>
+
+  <div class="chart-meta">
+  <div class="chart-meta-title">Данные карты</div>
+  <div class="chart-meta-grid">
+    <div class="chart-meta-row"><span class="lbl">По документам:</span><span class="val">06:05 МСК</span></div>
+    <div class="chart-meta-row"><span class="lbl">Ректифицировано:</span><span class="val">05:37 МСК (−28 мин)</span></div>
+    <div class="chart-meta-row"><span class="lbl">Солнце:</span><span class="val">Телец, 12 дом</span></div>
+    <div class="chart-meta-row"><span class="lbl">АСЦ:</span><span class="val">Близнецы</span></div>
+    <div class="chart-meta-row"><span class="lbl">МС:</span><span class="val">Козерог</span></div>
+  </div>
+  <div class="chart-meta-note">Ректификация подтверждена на 6/8 ключевых событий. Время 05:37 — наиболее вероятное.</div>
+</div>
 
   <div class="section">
     <div class="section-title">Ваше описание</div>
     <div class="desc">
-<p>Наталья — человек с редким сочетанием практической надёжности и живого интеллекта. Умеет видеть суть вещей быстро, говорит точно, без лишних слов, и при этом остаётся по-настоящему тёплой в близком кругу.</p>
+<p>Наталья — человек с редким сочетанием практической надёжности и живого интеллекта. Умеет видеть суть вещей быстро, говорит точно, без лишних слов — и при этом остаётся по-настоящему тёплой в близком кругу. Внешне кажется лёгкой и общительной: умеет расположить к себе, легко находит общий язык с очень разными людьми. За этой лёгкостью скрыт очень структурированный внутренний мир.</p>
 
-<p>Внешне кажется лёгкой и общительной — умеет расположить к себе, находит общий язык с разными людьми. Но внутри есть стержень: она очень чётко понимает, чего хочет, и умеет ждать подходящего момента, не торопясь и не расходуя энергию впустую.</p>
+<div class="highlight"><strong>Огромная внутренняя жизнь — невидимая для других.</strong> На поверхности одно, внутри — другое, и очень глубокое. Много сил и внимания уходит туда, куда другие не смотрят: на внутренние процессы, на анализ ситуаций, на переживания, которые не всегда показывает. Может делать что-то важное для других и не получать за это признания — и иногда это ощущается как несправедливость, но она редко об этом говорит вслух.</div>
 
-<div class="highlight">Огромная внутренняя жизнь — невидимая для других. На поверхности одно, внутри — другое, и очень глубокое. Много сил и внимания уходит туда, куда другие не смотрят. Может делать что-то важное для других и не получать за это признания — и иногда это ощущается как несправедливость.</div>
+<h3>Стратег, который не торопится</h3>
+<p>В работе — сильный стратег с хорошим чувством времени. Видит возможности там, где другие видят риски, умеет выстраивать долгосрочные планы и не терять гибкость по дороге. Знает, чего хочет достичь, и умеет работать в долгую — без демонстративности, без суеты. Для неё важна не просто материальная стабильность, а ощущение, что то, что она делает, имеет смысл и ведёт к чему-то настоящему.</p>
 
-<h3>Дети и семья</h3>
-<p>Дети важны глубоко и конкретно — не абстрактно «семья», а именно практическая забота, внимание к деталям, желание дать правильное воспитание. Склонность быть требовательной к себе как родителю — стандарты высокие.</p>
+<h3>Дети — эмоциональный центр</h3>
+<p>Дети важны не абстрактно, а очень конкретно и глубоко: практическая забота, внимание к деталям их жизни, желание дать правильное воспитание, высокие стандарты к себе как к родителю. Это не просто любовь — это один из главных ориентиров, по которому она оценивает, правильно ли она живёт.</p>
 
-<h3>Деньги и финансовая стабильность</h3>
-<p>Финансовая устойчивость даётся трудом, осторожностью, последовательностью. Потери могут происходить в моменты, когда действует импульсивно или под эмоциональным давлением.</p>
-
-<h3>Карьера и амбиции</h3>
-<p>В работе — сильный стратег с хорошим чувством времени. Видит возможности там, где другие видят риски. Умеет выстраивать долгосрочные планы, не теряя гибкости. При этом ей важна не просто материальная стабильность, а ощущение, что то, что она делает, имеет смысл и ведёт к чему-то настоящему.</p>
+<h3>Деньги и безопасность</h3>
+<p>Финансовая устойчивость для неё — это не просто счёт в банке, это ощущение, что близкие защищены. Именно поэтому она работает методично, осторожно, с запасом. Потери случаются в те моменты, когда действует под сильным эмоциональным давлением или в ситуации неопределённости — и это сильно бьёт именно потому, что деньги несут не только практическую, но и глубинную психологическую нагрузку.</p>
 
 <h3>Отношения</h3>
-<p>Ищет равного партнёра — того, кто будет рядом на одном уровне, а не будет восхищаться снизу вверх. Эмоционально сдержанна с новыми людьми, но с теми, кому доверяет, открывается глубоко и надолго. Верность и постоянство — не просто слова. Партнёры иногда кажутся больше или иначе, чем есть — это помогает любить глубоко, но иногда разочаровывает, когда реальность расходится с образом.</p>
+<p>Ищет равного партнёра — того, кто будет рядом на одном уровне, а не будет восхищаться снизу вверх. Эмоционально сдержанна с новыми людьми, но с теми, кому доверяет, — открывается глубоко и надолго. Верность и постоянство для неё — не просто слова, а базовые ожидания. Партнёры поначалу могут казаться ей значительнее или иначе, чем окажутся в реальности — это помогает любить глубоко, но иногда разочаровывает, когда образ расходится с человеком.</p>
 
-<div class="highlight">Зона роста и главный вызов:<br>Работа долго могла быть главным способом держать устойчивость — там есть смысл, результат, признание и контроль. Сейчас важная задача — не отказаться от работы, а перестать использовать её как единственный способ чувствовать себя ценной и в безопасности. Вернуть жизнь рядом с работой: тело, отношения, дом, удовольствие, тишину.</div>
+<div class="highlight"><strong>Главный вызов — работа как способ держаться.</strong><br>
+Работа долго могла быть не просто занятостью, а способом организовать внутреннюю тревогу: там есть смысл, результат, признание и контроль. Задача не в том, чтобы работать меньше. Задача — перестать использовать работу как единственный способ чувствовать себя ценной и в безопасности. Вернуть жизнь рядом с работой: тело, отношения, дом, удовольствие, тишину, личный смысл.</div>
 
-<p>Её вызов — научиться позволять себе не контролировать всё. Иногда лучший результат приходит, когда отпускает ситуацию и позволяет событиям развиваться без её прямого участия.</p>
+<p>Её вызов — научиться позволять себе не держать всё под контролем. Иногда лучший результат приходит именно тогда, когда она отпускает и позволяет событиям идти без её прямого управления.</p>
 </div>
   </div>
 
@@ -123,12 +119,10 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
       <div class="section-title">Обратная связь</div>
 
       <label>Насколько точно описание в целом?</label>
-      <div class="stars">
-        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-      </div>
+      <div class="stars"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
 
       <label>Что описано очень точно?</label>
-      <div class="hint">Что вы узнали себя с первого прочтения</div>
+      <div class="hint">Что узнали себя с первого прочтения</div>
       <textarea id="matched" placeholder="Можете процитировать фразу или описать своими словами…"></textarea>
 
       <label>Что НЕ совпало или показалось неверным?</label>
@@ -139,8 +133,7 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
       <textarea id="surprised" placeholder="Что вы не думали о себе, но теперь задумались…"></textarea>
 
       <label>По темам — насколько точно попало в каждую?</label>
-      
-<div class="themes">
+      <div class="themes">
   <div class="theme-row"><span class="theme-label">Характер и личность</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
   <div class="theme-row"><span class="theme-label">Работа и реализация</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
   <div class="theme-row"><span class="theme-label">Деньги и финансы</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
@@ -148,7 +141,6 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
   <div class="theme-row"><span class="theme-label">Семья / близкие</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
   <div class="theme-row"><span class="theme-label">Внутренние переживания</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
 </div>
-
 
       <label>Есть ли что-то важное в вашей жизни, чего нет в описании?</label>
       <textarea id="missing" placeholder="Необязательно…"></textarea>
@@ -167,9 +159,8 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
     <p class="footer-note">Откроется Telegram с готовым сообщением.<br>Нажмите «Отправить» внутри приложения.</p>
   </form>
 </div>
-<script>
-const TG = 'OlgaFleur';
-const NAME = 'Наталья Кис.';
+<script>const PNAME = 'Наталья Кис.';
+
 let rating = 0;
 document.querySelectorAll('.stars span').forEach((s,i) => {
   s.addEventListener('click', () => {
@@ -180,8 +171,7 @@ document.querySelectorAll('.stars span').forEach((s,i) => {
 document.querySelectorAll('.theme-btns button').forEach(b => {
   b.addEventListener('click', e => {
     e.preventDefault();
-    const g = b.closest('.theme-btns');
-    g.querySelectorAll('button').forEach(x => x.className = '');
+    b.closest('.theme-btns').querySelectorAll('button').forEach(x => x.className = '');
     b.className = 'sel-' + b.dataset.c;
   });
 });
@@ -192,20 +182,18 @@ document.getElementById('form').addEventListener('submit', function(e) {
   document.querySelectorAll('.theme-row').forEach(r => {
     const lbl = r.querySelector('.theme-label').textContent;
     const sel = r.querySelector('.sel-y,.sel-p,.sel-n');
-    const val = sel ? sel.textContent.trim() : '—';
-    themes += '\n  ' + lbl + ': ' + val;
+    themes += '\n  ' + lbl + ': ' + (sel ? sel.textContent.trim() : '—');
   });
-  let msg = '📋 ОБРАТНАЯ СВЯЗЬ — ' + NAME;
+  let msg = '📋 ОБРАТНАЯ СВЯЗЬ — ' + PNAME;
   if (rating) msg += '\n\n⭐ Точность: ' + rating + '/5';
-  const matched = g('matched'); if (matched) msg += '\n\n✅ Совпало:\n' + matched;
-  const notm = g('notmatched'); if (notm) msg += '\n\n❌ Не совпало:\n' + notm;
-  const surp = g('surprised'); if (surp) msg += '\n\n💡 Удивило:\n' + surp;
+  const m = g('matched'); if (m) msg += '\n\n✅ Совпало:\n' + m;
+  const n = g('notmatched'); if (n) msg += '\n\n❌ Не совпало:\n' + n;
+  const s = g('surprised'); if (s) msg += '\n\n💡 Удивило:\n' + s;
   if (themes.trim()) msg += '\n\n📊 По темам:' + themes;
   const miss = g('missing'); if (miss) msg += '\n\n🔍 Чего не хватает:\n' + miss;
   const tg = g('tg'); if (tg) msg += '\n\n📲 TG: ' + tg;
-  window.open('https://t.me/' + TG + '?text=' + encodeURIComponent(msg), '_blank');
+  window.open('https://t.me/OlgaFleur?text=' + encodeURIComponent(msg), '_blank');
 });
-function id(x){return document.getElementById(x);}
 </script>
 </body>
 </html>

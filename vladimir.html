@@ -6,79 +6,64 @@
 <title>Владимир Реп.</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f0f2f5; color: #1c1e21; padding: 20px; min-height: 100vh;
-}
-.card {
-  max-width: 640px; margin: 0 auto; background: white;
-  border-radius: 16px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.header { text-align: center; margin-bottom: 28px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #1c1e21; padding: 20px; min-height: 100vh; }
+.card { max-width: 640px; margin: 0 auto; background: white; border-radius: 16px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.header { text-align: center; margin-bottom: 24px; }
 .header .emoji { font-size: 40px; margin-bottom: 8px; }
 h1 { font-size: 22px; font-weight: 700; color: #1c1e21; margin-bottom: 6px; }
 .subtitle { font-size: 13px; color: #65676b; line-height: 1.6; }
 
+/* Блок данных карты */
+.chart-meta {
+  background: #f7f8fa; border-radius: 12px; padding: 14px 18px;
+  margin-bottom: 24px; border: 1px solid #e4e6ea;
+}
+.chart-meta-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #8a8d91; margin-bottom: 10px; }
+.chart-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+.chart-meta-row { display: flex; gap: 6px; font-size: 13px; }
+.chart-meta-row .lbl { color: #8a8d91; white-space: nowrap; }
+.chart-meta-row .val { color: #1c1e21; font-weight: 600; }
+.chart-meta-note { font-size: 12px; color: #8a8d91; margin-top: 8px; font-style: italic; }
+
 .section { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e4e6ea; }
 .section:last-of-type { border-bottom: none; }
-.section-title {
-  font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.8px; color: #65676b; margin-bottom: 16px;
-}
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #65676b; margin-bottom: 16px; }
 
 .desc p { font-size: 15px; line-height: 1.75; color: #1c1e21; margin-bottom: 14px; }
 .desc p:last-child { margin-bottom: 0; }
 .desc h3 { font-size: 14px; font-weight: 700; color: #1c1e21; margin: 20px 0 8px; }
 .desc ul { padding-left: 20px; margin-bottom: 12px; }
 .desc ul li { font-size: 14px; line-height: 1.65; color: #1c1e21; margin-bottom: 5px; }
-.highlight {
-  background: #f0f4ff; border-left: 3px solid #5b85d4;
-  border-radius: 0 8px 8px 0; padding: 12px 16px;
-  margin: 14px 0; font-size: 14px; line-height: 1.65; color: #1c1e21;
-}
+.highlight { background: #f0f4ff; border-left: 3px solid #5b85d4; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 14px; line-height: 1.65; color: #1c1e21; }
+.highlight strong { font-weight: 700; }
 
 label { display: block; font-size: 14px; font-weight: 600; color: #1c1e21; margin-bottom: 5px; margin-top: 14px; }
 .hint { font-size: 12px; color: #8a8d91; margin-bottom: 6px; font-weight: 400; margin-top: -2px; }
-textarea, input[type=text] {
-  width: 100%; padding: 10px 13px; border: 1.5px solid #dddfe2;
-  border-radius: 8px; font-size: 14px; color: #1c1e21; background: #f7f8fa;
-  margin-top: 6px; transition: border-color 0.2s; font-family: inherit;
-}
+textarea, input[type=text] { width: 100%; padding: 10px 13px; border: 1.5px solid #dddfe2; border-radius: 8px; font-size: 14px; color: #1c1e21; background: #f7f8fa; margin-top: 6px; transition: border-color 0.2s; font-family: inherit; }
 textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
 textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; background: white; }
 
 .stars { display: flex; gap: 10px; margin-top: 8px; font-size: 30px; }
-.stars span { cursor: pointer; transition: transform 0.1s; user-select: none; opacity: 0.35; }
-.stars span:hover, .stars span.on { opacity: 1; transform: scale(1.15); }
+.stars span { cursor: pointer; transition: transform 0.1s; user-select: none; opacity: 0.3; }
+.stars span.on { opacity: 1; transform: scale(1.1); }
 
 .themes { margin-top: 8px; }
-.theme-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 0; border-bottom: 1px solid #f0f2f5; gap: 8px;
-}
+.theme-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f2f5; gap: 8px; }
 .theme-row:last-child { border-bottom: none; }
 .theme-label { font-size: 14px; color: #1c1e21; }
 .theme-btns { display: flex; gap: 5px; flex-shrink: 0; }
-.theme-btns button {
-  padding: 5px 11px; border: 1.5px solid #dddfe2; border-radius: 20px;
-  font-size: 12px; cursor: pointer; background: white; color: #65676b;
-  transition: all 0.15s; font-family: inherit; white-space: nowrap;
-}
-.theme-btns button.sel-y { border-color: #4caf50; background: #e8f5e9; color: #2e7d32; font-weight:600; }
-.theme-btns button.sel-p { border-color: #ff9800; background: #fff3e0; color: #e65100; font-weight:600; }
-.theme-btns button.sel-n { border-color: #f44336; background: #ffebee; color: #c62828; font-weight:600; }
+.theme-btns button { padding: 5px 11px; border: 1.5px solid #dddfe2; border-radius: 20px; font-size: 12px; cursor: pointer; background: white; color: #65676b; transition: all 0.15s; font-family: inherit; }
+.theme-btns button.sel-y { border-color: #4caf50; background: #e8f5e9; color: #2e7d32; font-weight: 600; }
+.theme-btns button.sel-p { border-color: #ff9800; background: #fff3e0; color: #e65100; font-weight: 600; }
+.theme-btns button.sel-n { border-color: #f44336; background: #ffebee; color: #c62828; font-weight: 600; }
 
-.btn-send {
-  width: 100%; padding: 14px; background: #0088cc; color: white;
-  border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
-  cursor: pointer; margin-top: 20px; transition: background 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-}
+.btn-send { width: 100%; padding: 14px; background: #0088cc; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-send:hover { background: #006ba1; }
 .footer-note { text-align: center; font-size: 12px; color: #8a8d91; margin-top: 12px; line-height: 1.5; }
 
 @media (max-width: 480px) {
   .card { padding: 24px 16px; }
+  .chart-meta-grid { grid-template-columns: 1fr; }
   .theme-row { flex-direction: column; align-items: flex-start; }
 }
 </style>
@@ -88,23 +73,41 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
   <div class="header">
     <div class="emoji">🌟</div>
     <h1>Владимир Реп.</h1>
-    <p class="subtitle">Ольга составила это описание специально для вас.<br>Прочитайте и поделитесь обратной связью — что совпало, что нет.<br>Это займёт 5–7 минут и очень поможет уточнить карту.</p>
+    <p class="subtitle">Ольга составила это описание специально для вас.<br>Прочитайте и поделитесь — что совпало, что нет. Это поможет уточнить карту и сделать прогноз точнее.</p>
   </div>
+
+  <div class="chart-meta">
+  <div class="chart-meta-title">Данные карты</div>
+  <div class="chart-meta-grid">
+    <div class="chart-meta-row"><span class="lbl">По документам:</span><span class="val">09:00 МСК (со слов)</span></div>
+    <div class="chart-meta-row"><span class="lbl">Рабочее время:</span><span class="val">09:05 МСК ✓</span></div>
+    <div class="chart-meta-row"><span class="lbl">Солнце:</span><span class="val">Козерог, 1 дом</span></div>
+    <div class="chart-meta-row"><span class="lbl">АСЦ:</span><span class="val">Стрелец</span></div>
+    <div class="chart-meta-row"><span class="lbl">МС:</span><span class="val">Скорпион</span></div>
+  </div>
+  <div class="chart-meta-note">Время подтверждено верификацией на 13 событиях жизни (93% совпадений).</div>
+</div>
 
   <div class="section">
     <div class="section-title">Ваше описание</div>
     <div class="desc">
-<p>Владимир — человек, которому нужен масштаб. Лучше всего себя чувствует в движении: новые города, задачи, люди. Когда этого нет — увядает.</p>
+<p>Владимир — человек, которому нужен масштаб. Лучше всего себя чувствует в движении: новые города, задачи, горизонты, люди. Когда этого нет — не просто скучает, а буквально увядает. Стабильность без роста для него не отдых, а медленное угасание.</p>
 
-<p>По природе — строитель: берёт несуществующее, создаёт с нуля, выстраивает процесс, и когда оно начинает работать — ему становится скучно. Продажа производства после покупки — не провал, а его нормальный цикл.</p>
+<p>По природе — строитель и первопроходец. Берёт то, чего ещё нет, создаёт с нуля, выстраивает систему — и когда она начинает работать сама, интерес гаснет. Именно поэтому 26 лет на одном месте в найме (с апреля 2000 по май 2026) сочетались с параллельным бизнесом: купил производство, поднял, продал. Продажа — не потеря, это завершение его нормального цикла.</p>
 
-<div class="highlight">Глубокая потребность в признании — конкретном: чтобы люди доверяли его суждению и просили совета. Когда это есть — генерирует и расцветает. Когда нет — ищет следующий вызов.</div>
+<div class="highlight"><strong>Глубокая потребность в признании — конкретном.</strong> Не в комплиментах и не в лести. Ему важно, чтобы люди обращались к нему за мнением по существу, доверяли его суждению в реальных вопросах, слушали когда он говорит. Когда это есть — он генерирует, предлагает, тащит вперёд. Когда нет — уходит туда, где его будут слышать.</div>
 
-<p>Финансы — топливо для следующего проекта, не цель. Деньги приходят и уходят в следующую идею.</p>
+<p>Финансы для него — не цель и не мерило успеха, а топливо для следующего проекта. Деньги пришли — хорошо, ушли в новую идею — тоже нормально. Именно поэтому потери 2018 и 2026 годов болезненны, но не сломают: они воспринимаются как временная остановка, а не как конец.</p>
 
-<p>Музыка — второй язык, на котором говорит о том, о чём не говорит словами. Первая песня в январе 2026 совпала с потерей работы — не случайно.</p>
+<h3>Музыка — не хобби, а второй язык</h3>
+<p>Это то, на чём он говорит о том, о чём не говорит словами. Показательно: диск был записан в декабре 2012 — сразу после закрытия долгов и продажи бизнеса. Первая собственная песня написана в январе 2026 — в момент, когда рухнула работа. Каждый раз, когда жизнь проходила через серьёзный перелом, музыка появлялась. Это не случайность, это его способ переработать то, что иначе не переваривается.</p>
 
-<div class="highlight">Ключевое: лучшие периоды в жизни — когда рядом был равный партнёр, которому доверял полностью. Одному значительно сложнее.</div>
+<h3>Отношения и партнёрство</h3>
+<p>Ему нужен не просто близкий человек — а равный по уровню. Тот, кому он может доверять не только эмоционально, но и как партнёру в мышлении и в жизни. Когда такой человек рядом — он раскрывается полностью: поддерживает, строит, вкладывается. В одиночку — и внешне справляется, но внутренний ресурс расходуется намного быстрее.</p>
+
+<p>Три детей, два брака, новый круг через регату в 2010-м — это не разбросанность, это человек, который ищет свой мир и свою команду, меняя декорации, пока не найдёт то, что совпадает.</p>
+
+<div class="highlight"><strong>Ключевое наблюдение:</strong> он умеет держать длинные обязательства — 26 лет на одном месте это доказывают. Но только если там есть пространство для его инициативы и рост. Без этого — даже самое надёжное место становится клеткой.</div>
 </div>
   </div>
 
@@ -113,12 +116,10 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
       <div class="section-title">Обратная связь</div>
 
       <label>Насколько точно описание в целом?</label>
-      <div class="stars">
-        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-      </div>
+      <div class="stars"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
 
       <label>Что описано очень точно?</label>
-      <div class="hint">Что вы узнали себя с первого прочтения</div>
+      <div class="hint">Что узнали себя с первого прочтения</div>
       <textarea id="matched" placeholder="Можете процитировать фразу или описать своими словами…"></textarea>
 
       <label>Что НЕ совпало или показалось неверным?</label>
@@ -129,8 +130,7 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
       <textarea id="surprised" placeholder="Что вы не думали о себе, но теперь задумались…"></textarea>
 
       <label>По темам — насколько точно попало в каждую?</label>
-      
-<div class="themes">
+      <div class="themes">
   <div class="theme-row"><span class="theme-label">Характер и личность</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
   <div class="theme-row"><span class="theme-label">Работа и реализация</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
   <div class="theme-row"><span class="theme-label">Деньги и финансы</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
@@ -138,7 +138,6 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
   <div class="theme-row"><span class="theme-label">Семья / близкие</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
   <div class="theme-row"><span class="theme-label">Внутренние переживания</span><div class="theme-btns"><button data-c="y">Точно ✓</button><button data-c="p">Частично</button><button data-c="n">Не моё</button></div></div>
 </div>
-
 
       <label>Есть ли что-то важное в вашей жизни, чего нет в описании?</label>
       <textarea id="missing" placeholder="Необязательно…"></textarea>
@@ -157,9 +156,8 @@ textarea:focus, input[type=text]:focus { outline: none; border-color: #5b85d4; b
     <p class="footer-note">Откроется Telegram с готовым сообщением.<br>Нажмите «Отправить» внутри приложения.</p>
   </form>
 </div>
-<script>
-const TG = 'OlgaFleur';
-const NAME = 'Владимир Реп.';
+<script>const PNAME = 'Владимир Реп.';
+
 let rating = 0;
 document.querySelectorAll('.stars span').forEach((s,i) => {
   s.addEventListener('click', () => {
@@ -170,8 +168,7 @@ document.querySelectorAll('.stars span').forEach((s,i) => {
 document.querySelectorAll('.theme-btns button').forEach(b => {
   b.addEventListener('click', e => {
     e.preventDefault();
-    const g = b.closest('.theme-btns');
-    g.querySelectorAll('button').forEach(x => x.className = '');
+    b.closest('.theme-btns').querySelectorAll('button').forEach(x => x.className = '');
     b.className = 'sel-' + b.dataset.c;
   });
 });
@@ -182,20 +179,18 @@ document.getElementById('form').addEventListener('submit', function(e) {
   document.querySelectorAll('.theme-row').forEach(r => {
     const lbl = r.querySelector('.theme-label').textContent;
     const sel = r.querySelector('.sel-y,.sel-p,.sel-n');
-    const val = sel ? sel.textContent.trim() : '—';
-    themes += '\n  ' + lbl + ': ' + val;
+    themes += '\n  ' + lbl + ': ' + (sel ? sel.textContent.trim() : '—');
   });
-  let msg = '📋 ОБРАТНАЯ СВЯЗЬ — ' + NAME;
+  let msg = '📋 ОБРАТНАЯ СВЯЗЬ — ' + PNAME;
   if (rating) msg += '\n\n⭐ Точность: ' + rating + '/5';
-  const matched = g('matched'); if (matched) msg += '\n\n✅ Совпало:\n' + matched;
-  const notm = g('notmatched'); if (notm) msg += '\n\n❌ Не совпало:\n' + notm;
-  const surp = g('surprised'); if (surp) msg += '\n\n💡 Удивило:\n' + surp;
+  const m = g('matched'); if (m) msg += '\n\n✅ Совпало:\n' + m;
+  const n = g('notmatched'); if (n) msg += '\n\n❌ Не совпало:\n' + n;
+  const s = g('surprised'); if (s) msg += '\n\n💡 Удивило:\n' + s;
   if (themes.trim()) msg += '\n\n📊 По темам:' + themes;
   const miss = g('missing'); if (miss) msg += '\n\n🔍 Чего не хватает:\n' + miss;
   const tg = g('tg'); if (tg) msg += '\n\n📲 TG: ' + tg;
-  window.open('https://t.me/' + TG + '?text=' + encodeURIComponent(msg), '_blank');
+  window.open('https://t.me/OlgaFleur?text=' + encodeURIComponent(msg), '_blank');
 });
-function id(x){return document.getElementById(x);}
 </script>
 </body>
 </html>
